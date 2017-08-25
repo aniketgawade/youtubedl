@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import unicode_literals
+import os
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
@@ -10,7 +11,7 @@ import youtube_dl
 # tab of
 #   https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
-DEVELOPER_KEY = "REPLACE-KEY"
+DEVELOPER_KEY = os.environ['DEVELOPER_KEY']
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
@@ -35,7 +36,7 @@ def youtube_search(options):
   # matching videos, channels, and playlists.
   for id, search_result in enumerate(search_response.get("items", [])):
     if search_result["id"]["kind"] == "youtube#video":
-      videos.append("%2d : %s (%s) - %s" % (id + 1, search_result["snippet"]["title"],
+      videos.append("%2d : %s (https://www.youtube.com/watch?v=%s) - %s" % (id + 1, search_result["snippet"]["title"],
                                  search_result["id"]["videoId"], search_result["snippet"]["channelTitle"]))
       videos_id.append("%s" % search_result["id"]["videoId"])
     elif search_result["id"]["kind"] == "youtube#channel":
