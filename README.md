@@ -7,7 +7,7 @@ Install insctructions:
 - pip install youtube_dl
 - pip install --upgrade google-api-python-client
 - brew install ffmpeg
-- Add developer/api key to code 
+- export DEVELOPER_KEY=#your_dev_key
 - run $python searchdlyoutube.py --q "search string"
 
 You can learn more about api here:
